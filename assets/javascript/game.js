@@ -29,10 +29,7 @@ function blankGeneration() {
 console.log(blanksAndGuesses);
 //I need a function that listens for the users keypress.
 document.onkeypress = function(event) {
-    if (event.key) {
-        
-        
-    }
+
 }
 blankGeneration();
 //The user guesses a letter.
