@@ -1,5 +1,5 @@
 // Declare Variables Here
-let hangmanWords = [`A`, `CAT`, `MOON`, `ZULU`];
+let hangmanWords = [`LINK`, `ZELDA`, `SAMUS`, `MARIO`, `PIKACHU`, `NESS`, `PIT`, `CLOUD`, `SONIC`, `LUIGI`, `YOSHI`, `SNAKE`, `LUCAS`, `BOWSER`, `GANONDORF` ];
 let gameWins = 0;
 let gameLosses = 0;
 let blanksAndGuesses = [];
@@ -52,7 +52,7 @@ function guessCheck() {
             winCheck();
         } 
     }
-    if (blanksAndGuesses.indexOf(event.key) < 0) {
+    if (blanksAndGuesses.indexOf(event.key.toUpperCase()) < 0) {
         guessCount--;
         document.getElementById(`guessCount`).textContent = guessCount;
         lossCheck();
@@ -74,9 +74,7 @@ function winCheck() {
         gameWins++;
         document.getElementById(`wins`).textContent = gameWins;
         alert(`You win!`);
-        startGame();
     }
-    return gameWins;
 }
 
 function lossCheck() {
@@ -84,9 +82,7 @@ function lossCheck() {
         gameLosses++;
         document.getElementById(`losses`).textContent = gameLosses;
         alert(`You lose!`);
-        startGame();
     }
-    return gameLosses;
 }
 
 
@@ -95,3 +91,6 @@ startGame();
 document.onkeypress = function(event) {
     letterGuessed();    
 }
+document.getElementById(`reset`).addEventListener(`click`, function() {
+    startGame();
+})
