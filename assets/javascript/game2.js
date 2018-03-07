@@ -3,6 +3,8 @@ let hangmanWords = [`A`, `CAT`, `MOON`, `ZULU`];
 let gameWins = 0;
 let gameLosses = 0;
 let blanksAndGuesses = [];
+let guessCount = 7;
+let lettersGuessed = [];
 
 
 // Declare Functions here
@@ -10,15 +12,13 @@ function startGame() {
     let guessCount = 7;
     let lettersToGuess = [];
     let lettersGuessed = [];
+    let blanksAndGuesses = [];
     let compWord = "str";
+    document.getElementById(`lettersToGuess`).textContent = blanksAndGuesses;
     document.getElementById(`guessCount`).textContent = guessCount;
     document.getElementById(`wins`).textContent = gameWins;
     document.getElementById(`losses`).textContent = gameLosses;
     blankGeneration();
-}
-
-function playGame() {
-    startGame();
 }
 
 function wordChoice() {
@@ -36,67 +36,60 @@ function blankGeneration() {
 
 function userGuess() {
     document.onkeypress = function(event) {
-        guessCheck();    
+        letterGuessed();    
     }
 }
 
 function guessCheck() {
+    lettersGuessed.push(event.key.toUpperCase());
     for (let i = 0; i < blanksAndGuesses.length; i++) {
         // blanksAndGuesses may be the wrong thing to match here.
-        if (key.event.toUpperCase() = blanksAndGuesses[i]) {
-            correctGuess();
+        if (event.key.toUpperCase() == compWord.split(``)[i]) {
+            blanksAndGuesses[i] = (event.key.toUpperCase());
+            document.getElementById(`lettersToGuess`).textContent = blanksAndGuesses.join(" ");
             winCheck();
         } 
-
-        else {
-            letterGuessed();
-        }
     }
+    if (blanksAndGuesses.indexOf(event.key) < 0) {
+        guessCount--;
+        document.getElementById(`guessCount`).textContent = guessCount;
+        lossCheck();
+    }
+
 }
 
 function letterGuessed() {
- if (lettersGuessed.indexOf(key.event.toUpperCase()) > -1) {
+ if (lettersGuessed.indexOf(event.key.toUpperCase()) > -1) {
      alert(`You already guessed that letter!`);
  }
  else {
-     lettersGuessed.push(key.event.toUpperCase());
+    guessCheck();
  }
 }
 
-function correctGuess() {
-    blanksAndGuesses[i].push(key.event.toUpperCase());
-}
-
-function incorrectGuess() {
-    guessCount--;
-    document.getElementById(`guessCount`).textContent = guessCount;
-}
-
 function winCheck() {
-    //This may need t be blanksAndGuesses.join?
-    if (blanksAndGuesses == compWord) {
-        updateWins();
+    if (blanksAndGuesses.join(``) === compWord) {
+        gameWins++;
+        document.getElementById(`wins`).textContent = gameWins;
         alert(`You win!`);
+        startGame();
     }
+    return gameWins;
 }
 
 function lossCheck() {
     if (guessCount === 0) {
-        updateLosses();
+        gameLosses++;
+        document.getElementById(`losses`).textContent = gameLosses;
         alert(`You lose!`);
+        startGame();
     }
-}
-
-function updateWins() {
-    gameWins++;
-    document.getElementById(`wins`).textContent = gameWins;
-}
-
-function updateLosses() {
-    gameLosses++;
-    document.getElementById(`losses`).textContent = gameLosses;
+    return gameLosses;
 }
 
 
 // Events here
 startGame();
+document.onkeypress = function(event) {
+    letterGuessed();    
+}
