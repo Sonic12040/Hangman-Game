@@ -9,15 +9,16 @@ let lettersGuessed = [];
 
 // Declare Functions here
 function startGame() {
-    let guessCount = 7;
-    let lettersToGuess = [];
-    let lettersGuessed = [];
-    let blanksAndGuesses = [];
+    guessCount = 7;
+    lettersToGuess = [];
+    lettersGuessed = [];
+    blanksAndGuesses = [];
     let compWord = "str";
     document.getElementById(`lettersToGuess`).textContent = blanksAndGuesses;
     document.getElementById(`guessCount`).textContent = guessCount;
     document.getElementById(`wins`).textContent = gameWins;
     document.getElementById(`losses`).textContent = gameLosses;
+    document.getElementById(`lettersGuessed`).textContent = lettersGuessed;
     blankGeneration();
 }
 
@@ -27,7 +28,7 @@ function wordChoice() {
 }
 
 function blankGeneration() {
-    let lettersToGuess = wordChoice().split("");
+    lettersToGuess = wordChoice().split("");
     for (let i = 0; i < lettersToGuess.length; i++) {
         blanksAndGuesses.push("_ ");
     }
@@ -42,6 +43,7 @@ function userGuess() {
 
 function guessCheck() {
     lettersGuessed.push(event.key.toUpperCase());
+    document.getElementById(`lettersGuessed`).textContent = lettersGuessed;
     for (let i = 0; i < blanksAndGuesses.length; i++) {
         // blanksAndGuesses may be the wrong thing to match here.
         if (event.key.toUpperCase() == compWord.split(``)[i]) {
