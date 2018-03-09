@@ -1,11 +1,10 @@
 // Declare Variables Here
-let hangmanWords = [`LINK`, `ZELDA`, `SAMUS`, `MARIO`, `PIKACHU`, `NESS`, `PIT`, `CLOUD`, `SONIC`, `LUIGI`, `YOSHI`, `SNAKE`, `LUCAS`, `BOWSER`, `GANONDORF` ];
+let hangmanWords = [`LINK`, `ZELDA`, `SAMUS`, `MARIO`, `PIKACHU`, `NESS`, `PIT`, `CLOUD`, `SONIC`, `LUIGI`, `YOSHI`, `SNAKE`, `LUCAS`, `BOWSER`, `GANONDORF`, `WARIO`, `PEACH` ];
 let gameWins = 0;
 let gameLosses = 0;
 let blanksAndGuesses = [];
 let guessCount = 7;
 let lettersGuessed = [];
-
 
 // Declare Functions here
 function startGame() {
@@ -35,20 +34,13 @@ function blankGeneration() {
     document.getElementById(`lettersToGuess`).textContent = blanksAndGuesses.join(" ");
 }
 
-function userGuess() {
-    document.onkeypress = function(event) {
-        letterGuessed();    
-    }
-}
-
 function guessCheck() {
     lettersGuessed.push(event.key.toUpperCase());
-    document.getElementById(`lettersGuessed`).textContent = lettersGuessed;
+    document.getElementById(`lettersGuessed`).textContent = lettersGuessed.sort();
     for (let i = 0; i < blanksAndGuesses.length; i++) {
-        // blanksAndGuesses may be the wrong thing to match here.
-        if (event.key.toUpperCase() == compWord.split(``)[i]) {
+        if (event.key.toUpperCase() === compWord[i]) {
             blanksAndGuesses[i] = (event.key.toUpperCase());
-            document.getElementById(`lettersToGuess`).textContent = blanksAndGuesses.join(" ");
+            document.getElementById(`lettersToGuess`).textContent = blanksAndGuesses.join(``);
             winCheck();
         } 
     }
@@ -85,9 +77,9 @@ function lossCheck() {
     }
 }
 
-
 // Events here
 startGame();
+
 document.onkeypress = function(event) {
     letterGuessed();    
 }

@@ -1,0 +1,33 @@
+.bg-img1 {
+    background:
+        url("../images/Smash_Ball.png");
+        background-color: wheat;
+}
+
+.bgp-lb {
+    background-position: left bottom;
+}
+
+.bgr-nr {
+    background-repeat: no-repeat;
+}
+
+.bgs-400px {
+    background-size: 400px 400px;
+}
+
+.fs-200p {
+    font-size: 200%;
+}
+
+.fs-300p {
+    font-size: 300%;
+}
+
+.h-100p {
+    height: 100%;
+}
+
+.ta-c {
+    text-align: center;
+}
