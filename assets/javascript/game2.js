@@ -34,7 +34,7 @@ function blankGeneration() {
     document.getElementById(`lettersToGuess`).textContent = blanksAndGuesses.join(" ");
 }
 
-function guessCheck() {
+function guessCheck(event) {
     lettersGuessed.push(event.key.toUpperCase());
     document.getElementById(`lettersGuessed`).textContent = lettersGuessed.sort();
     for (let i = 0; i < blanksAndGuesses.length; i++) {
@@ -42,7 +42,7 @@ function guessCheck() {
             blanksAndGuesses[i] = (event.key.toUpperCase());
             document.getElementById(`lettersToGuess`).textContent = blanksAndGuesses.join(``);
             winCheck();
-        } 
+        }
     }
     if (blanksAndGuesses.indexOf(event.key.toUpperCase()) < 0) {
         guessCount--;
@@ -52,12 +52,12 @@ function guessCheck() {
 
 }
 
-function letterGuessed() {
+function letterGuessed(event) {
  if (lettersGuessed.indexOf(event.key.toUpperCase()) > -1) {
      alert(`You already guessed that letter!`);
  }
  else {
-    guessCheck();
+    guessCheck(event);
  }
 }
 
@@ -81,7 +81,7 @@ function lossCheck() {
 startGame();
 
 document.onkeypress = function(event) {
-    letterGuessed();    
+    letterGuessed(event);
 }
 document.getElementById(`reset`).addEventListener(`click`, function() {
     startGame();
